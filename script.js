@@ -1091,66 +1091,7 @@ function showAdjustment(message) {
     resultBox.innerHTML = message;
 }
 
-// ==============================
-// 加針規律圖片面板
-// ==============================
 
-const ruleButtons =
-    document.querySelectorAll(".rule-button");
-
-const rulePanels =
-    document.querySelectorAll(".rule-panel");
-
-const ruleCloseButtons =
-    document.querySelectorAll(".rule-close-button");
-
-
-function closeAllRulePanels() {
-    rulePanels.forEach(panel => {
-        panel.hidden = true;
-    });
-
-    ruleButtons.forEach(button => {
-        button.classList.remove("is-active");
-    });
-}
-
-
-ruleButtons.forEach(button => {
-    button.addEventListener("click", () => {
-        const targetId =
-            button.dataset.ruleTarget;
-
-        const targetPanel =
-            document.getElementById(targetId);
-
-        if (!targetPanel) {
-            return;
-        }
-
-        const panelWasOpen =
-            !targetPanel.hidden;
-
-        closeAllRulePanels();
-
-        if (!panelWasOpen) {
-            targetPanel.hidden = false;
-            button.classList.add("is-active");
-
-            targetPanel.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-        }
-    });
-});
-
-
-ruleCloseButtons.forEach(button => {
-    button.addEventListener("click", () => {
-        closeAllRulePanels();
-    });
-});
 
 // ==============================
 // 語言切換
@@ -1184,6 +1125,72 @@ function translate(key, variables = {}) {
     return text;
 }
 
+document.addEventListener("contextmenu", function (e) {
+    e.preventDefault();
+});
 
 
+// ==============================
+// 加針規律面板控制
+// ==============================
 
+document.addEventListener("DOMContentLoaded", function () {
+    const ruleButtons = document.querySelectorAll(
+        ".rule-button[data-rule-target]"
+    );
+
+    const rulePanels = document.querySelectorAll(".rule-panel");
+
+    const closeButtons = document.querySelectorAll(
+        ".rule-close-button"
+    );
+
+    function closeAllRulePanels() {
+        rulePanels.forEach(function (panel) {
+            panel.hidden = true;
+        });
+
+        ruleButtons.forEach(function (button) {
+            button.classList.remove("is-active");
+            button.setAttribute("aria-expanded", "false");
+        });
+    }
+
+    ruleButtons.forEach(function (button) {
+        button.setAttribute("aria-expanded", "false");
+
+        button.addEventListener("click", function () {
+            const targetId = button.dataset.ruleTarget;
+            const targetPanel = document.getElementById(targetId);
+
+            if (!targetPanel) {
+                console.error(
+                    "找不到規律面板：",
+                    targetId
+                );
+                return;
+            }
+
+            const wasOpen = !targetPanel.hidden;
+
+            closeAllRulePanels();
+
+            if (!wasOpen) {
+                targetPanel.hidden = false;
+                button.classList.add("is-active");
+                button.setAttribute("aria-expanded", "true");
+
+                targetPanel.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            }
+        });
+    });
+
+    closeButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+            closeAllRulePanels();
+        });
+    });
+});
