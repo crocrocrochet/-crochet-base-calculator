@@ -2,14 +2,32 @@
 // 取得網頁元件
 // ==============================
 
+function sendAnalyticsEvent(eventName, parameters = {}) {
+    if (typeof window.gtag === "function") {
+        window.gtag("event", eventName, parameters);
+    }
+}
 const patternSizeInput = document.getElementById("patternSize");
 const patternCountInput = document.getElementById("patternCount");
 const totalStitchesInput = document.getElementById("totalStitches");
 const calculateButton = document.getElementById("calculateBtn");
 const resultBox = document.getElementById("result");
 
-calculateButton.addEventListener("click", calculateStitches);
+calculateButton.addEventListener("click", function(){
 
+    gtag("event","calculation_success",{
+
+    pattern_size: patternSize,
+
+    pattern_count: patternCount,
+
+    total: totalStitches
+
+});
+
+    calculateStitches();
+
+});
 
 // ==============================
 // 主計算函式
@@ -702,6 +720,8 @@ function displayAllPlans(data) {
     resultBox.innerHTML = html;
 }
 
+sendAnalyticsEvent("calculation_success");
+
 function createPlanGroup(
     groupTitle,
     plans,
@@ -1180,6 +1200,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 button.classList.add("is-active");
                 button.setAttribute("aria-expanded", "true");
 
+                if (targetId === "ovalRulePanel") {
+    sendAnalyticsEvent("open_oval_rule");
+}
+
+if (targetId === "squareRulePanel") {
+    sendAnalyticsEvent("open_square_rule");
+}
                 targetPanel.scrollIntoView({
                     behavior: "smooth",
                     block: "start"
