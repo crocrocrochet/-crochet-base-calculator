@@ -656,6 +656,43 @@ button {
     grid-template-columns: 80px minmax(0, 1fr);
 }
 
+.language-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    min-height: 38px;
+    padding: 8px 16px;
+
+    border: 1px solid #8f7661;
+    border-radius: 999px;
+
+    background-color: transparent;
+    color: #6f5948;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.language-button:hover {
+    background-color: #8f7661;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.language-button:focus-visible {
+    outline: 3px solid rgba(143, 118, 97, 0.25);
+    outline-offset: 3px;
+}
 
 /* =========================
    手機版
@@ -670,6 +707,22 @@ button {
     .starting-method-value {
         font-size: 12px;
     }
+    .site-header {
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.site-brand {
+    flex: 1;
+    align-items: center;
+    gap: 10px;
+}
+
+.language-button {
+    min-height: 34px;
+    padding: 7px 12px;
+    font-size: 13px;
+}
 }
 
 /* =========================
@@ -950,9 +1003,17 @@ button {
 
 .site-header {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.site-brand {
+    display: flex;
     align-items: center;
     gap: 14px;
-    margin: 0;
+    min-width: 0;
 }
 
 .site-logo {
@@ -968,9 +1029,9 @@ button {
 }
 
 .site-title-group h1 {
-    margin: 0 0 5px;
+    margin: 0 0 1px;
     color: #715b49;
-    font-size: 25px;
+    font-size: 20px;
     line-height: 1.25;
 }
 
