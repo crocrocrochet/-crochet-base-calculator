@@ -393,6 +393,7 @@ button:hover {
 }
 
 
+
 /* =========================
    手機版
 ========================= */
@@ -694,6 +695,18 @@ button {
     outline-offset: 3px;
 }
 
+.link-button-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+    flex-shrink:0;
+
+}
+
 /* =========================
    手機版
 ========================= */
@@ -722,6 +735,12 @@ button {
     min-height: 34px;
     padding: 7px 12px;
     font-size: 13px;
+}
+
+.link-button-group{
+
+    width:auto;
+
 }
 }
 
@@ -1029,16 +1048,16 @@ button {
 }
 
 .site-title-group h1 {
-    margin: 0 0 1px;
+    margin: 5 0 1px;
     color: #715b49;
-    font-size: 20px;
+    font-size: 16px;
     line-height: 1.25;
 }
 
 .site-name {
     margin: 0;
     color: #9a806c;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 
